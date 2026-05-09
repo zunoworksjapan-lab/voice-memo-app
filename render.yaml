@@ -29,6 +29,7 @@ services:
     repo: https://github.com/zunoworksjapan-lab/voice-memo-app
     rootDir: frontend
     buildCommand: echo "No build needed"
+    publishPath: .
     headers:
       - path: /*
         name: Cache-Control

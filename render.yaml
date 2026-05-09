@@ -23,7 +23,7 @@ services:
         value: 3.11.0
 
   # フロントエンド（静的サイト）
-  - type: static
+  - type: static_site
     name: voice-memo-app
     repo: https://github.com/zunoworksjapan-lab/voice-memo-app
     rootDir: frontend

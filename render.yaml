@@ -25,7 +25,6 @@ services:
   # フロントエンド（静的サイト）
   - type: web
     name: voice-memo-app
-    plan: free
     runtime: static
     repo: https://github.com/zunoworksjapan-lab/voice-memo-app
     rootDir: frontend

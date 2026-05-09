@@ -23,9 +23,8 @@ services:
         value: 3.11.0
 
   # フロントエンド（静的サイト）
-  - type: web
+  - type: static
     name: voice-memo-app
-    runtime: static
     repo: https://github.com/zunoworksjapan-lab/voice-memo-app
     rootDir: frontend
     buildCommand: echo "No build needed"

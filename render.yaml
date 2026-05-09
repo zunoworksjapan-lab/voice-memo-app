@@ -1,0 +1,34 @@
+# Render デプロイ設定
+
+services:
+  # バックエンド API
+  - type: web
+    name: voice-memo-api
+    runtime: python
+    repo: https://github.com/zunoworksjapan-lab/voice-memo-app
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GOOGLE_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: GOOGLE_DRIVE_FOLDER_ID
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.0
+
+  # フロントエンド（静的サイト）
+  - type: web
+    name: voice-memo-app
+    runtime: static
+    repo: https://github.com/zunoworksjapan-lab/voice-memo-app
+    rootDir: frontend
+    buildCommand: echo "No build needed"
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=3600

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#6c5ce7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="音声メモ">
+  <meta name="description" content="音声入力したテキストを読みやすく整形してGoogleドキュメントに保存するアプリ">
+
+  <title>音声メモ</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="app-logo">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+          <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+        </svg>
+      </div>
+      <h1 class="app-title">音声メモ</h1>
+      <p class="app-subtitle">話した内容を整えて Google Docs に保存</p>
+    </header>
+
+    <!-- Main Card -->
+    <main class="main-card">
+
+      <!-- Text Input -->
+      <div class="input-section">
+        <label class="input-label" for="text-input">
+          <span class="icon">📝</span>
+          <span>テキスト入力</span>
+        </label>
+        <textarea
+          id="text-input"
+          class="text-input"
+          placeholder="ここをタップして、キーボードのマイク🎤で音声入力してください..."
+          maxlength="5000"
+          autocomplete="off"
+          spellcheck="false"
+        ></textarea>
+        <div class="input-hint">
+          <span class="mic-icon">🎤</span>
+          <span>キーボード左下のマイクボタンで音声入力できます</span>
+        </div>
+        <div class="char-count" id="char-count">0 / 5000</div>
+      </div>
+
+      <!-- Title Input (Optional) -->
+      <div class="title-section">
+        <label class="input-label" for="title-input">
+          <span class="icon">📌</span>
+          <span>タイトル（任意）</span>
+        </label>
+        <input
+          type="text"
+          id="title-input"
+          class="title-input"
+          placeholder="例: 会議メモ、アイデア、買い物リスト..."
+          maxlength="100"
+        >
+      </div>
+
+      <!-- Submit Button -->
+      <button id="submit-btn" class="submit-btn" disabled>
+        <div class="spinner"></div>
+        <span class="btn-text">✨ 整形して Google Docs に保存</span>
+        <span class="btn-loading-text">処理中...</span>
+      </button>
+
+      <!-- Result Section -->
+      <div id="result-section" class="result-section">
+        <div id="result-card" class="result-card"></div>
+      </div>
+
+      <!-- History Section -->
+      <div id="history-section" class="history-section" style="display: none;">
+        <div class="history-header">
+          <span class="history-title">
+            <span>📋</span>
+            <span>最近のメモ</span>
+          </span>
+          <button id="history-clear" class="history-clear">削除</button>
+        </div>
+        <div id="history-list" class="history-list"></div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Powered by Gemini AI & Google Docs</p>
+    </footer>
+
+  </div>
+
+  <!-- PWA Install Banner (iOS) -->
+  <div id="install-banner" class="install-banner">
+    <div class="install-content">
+      <div class="install-text">
+        <strong>ホーム画面に追加</strong>してアプリのように使えます。
+        Safari の <strong>共有ボタン ↗</strong> → <strong>「ホーム画面に追加」</strong>
+      </div>
+      <button id="install-dismiss" class="install-dismiss">閉じる</button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Scripts -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="/app.js"></script>
+</body>
+</html>
